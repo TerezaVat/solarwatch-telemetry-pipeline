@@ -2,20 +2,23 @@
 """
 SOLARWATCH
 Solar Energy Telemetry & Monitoring Pipeline
-
-Main application entry point.
 """
+
+from ingestion import load_telemetry
+
 
 def main():
     print("=" * 45)
     print("SOLARWATCH TELEMETRY PIPELINE")
     print("=" * 45)
 
-    print("System status: INITIALIZING")
-    print("Environment: DEVELOPMENT")
-    print("Data source: SOLAR TELEMETRY")
+    df = load_telemetry("data/telemetry.csv")
 
-    print("\nWelcome to SOLARWATCH!")
+    print("\nDataset preview:")
+    print(df.head())
+
+    print("\nDataset information:")
+    df.info()
 
 
 if __name__ == "__main__":
