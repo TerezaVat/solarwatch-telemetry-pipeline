@@ -7,6 +7,9 @@ Solar Energy Telemetry & Monitoring Pipeline
 from ingestion import load_telemetry
 from validation import validate_telemetry
 from transformation import transform_telemetry
+from database import save_telemetry
+from analytics import run_sql_queries
+from visualization import generate_visualizations
 
 
 def main():
@@ -79,6 +82,24 @@ def main():
         f"Net battery energy (positive = discharge): "
         f"{transformed_df['battery_energy_wh'].sum():.2f} Wh"
     )
+
+    # STEP 5: DATA LOADING
+    print("\nDATABASE STORAGE")
+    print("-" * 50)
+
+    save_telemetry(transformed_df)
+
+    # STEP 6: SQL ANALYTICS
+    print("\nSQL ANALYTICS")
+    print("=" * 50)
+
+    run_sql_queries()
+
+    # STEP 7: DATA VISUALIZATION
+    print("\nDATA VISUALIZATION")
+    print("=" * 50)
+
+    generate_visualizations()
 
 
 if __name__ == "__main__":
